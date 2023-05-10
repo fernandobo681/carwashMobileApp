@@ -1,0 +1,9 @@
+The hooks folder is where you will keep any custom hooks that 
+are used throughout your application. A hook is a special type 
+of function in React that allows you to reuse stateful logic 
+across your components.
+
+Having all of your reusable/used in multiple places custom hooks
+in a centralized location makes it easier to manage and maintain them,
+as well as reducing the risk of code duplication and making it easier
+to share hooks across different parts of your application.

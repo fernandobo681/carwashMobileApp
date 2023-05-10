@@ -1,0 +1,8 @@
+The localization folder is where you will keep all of the files 
+related to internationalization in your application. 
+This includes language files, string constants, and any other 
+resources needed to support multiple languages in your application.
+
+Having these files in a centralized location, it makes it easier 
+to manage and maintain them, as well as reducing the risk of code 
+duplication and making it easier to support multiple languages in your application.

@@ -1,0 +1,7 @@
+Utility functions can be an important part of your React Native application,
+as they provide a way to reuse code that can be used in multiple parts of
+your application. The utils folder in your application is a great place 
+to store utility functions that are used throughout your application. 
+By centralizing these functions in one location, you can ensure that they
+are easy to find and use in other parts of your code. For example: 
+react-native layout related utility functions.

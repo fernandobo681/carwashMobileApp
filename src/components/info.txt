@@ -1,0 +1,8 @@
+The components folder is where you will keep all of your reusable components. 
+These components should be isolated and not specific to any particular feature or domain. 
+Examples of these types of components include headers, buttons, and list items.
+
+Keeping these components separate from your feature-specific components
+makes it easier to manage and reuse them throughout your application and 
+reduces the amount of duplication in your code.
+

@@ -1,0 +1,5 @@
+The services folder is where you will keep all of the code related 
+to the underlying infrastructure of your application. 
+This includes code for working with push notifications, 
+error monitoring, and any other services that are used to provide 
+the underlying functionality of your application.
