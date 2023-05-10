@@ -122,6 +122,7 @@ export default App;
 
 // import React from 'react';
 // import {Text, View} from 'react-native';
+// import LoginScreen from './src/screens/auth/LoginScreen';
 
 // const HelloWorldApp = () => {
 //   return (
@@ -131,7 +132,7 @@ export default App;
 //         justifyContent: 'center',
 //         alignItems: 'center',
 //       }}>
-//       <Text>Hello, world!</Text>
+//         <LoginScreen/>
 //     </View>
 //   );
 // };
