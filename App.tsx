@@ -120,7 +120,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/home/HomeScreen';
-import LoginScreen from './src/screens/auth/LoginScreen';
+import SignInScreen from './src/screens/auth/SignInScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -128,8 +128,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Inicio de sesión" component={SignInScreen} />
         <Stack.Screen name="Inicio" component={HomeScreen} />
-        <Stack.Screen name="Inicio de sesíon" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
