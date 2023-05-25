@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert, StyleSheet, Text } from 'react-native';
+import { View, TextInput, Button, Alert, StyleSheet, Text, FlatList, StatusBar } from 'react-native';
 import axios from 'axios';
+interface User {
+  email: string;
+  password: string;
+}
 
 export default function SignInScreen() {
   const [email, setEmail] = useState('fernando@gmail.com');
   const [password, setPassword] = useState('123456');
-  const [data, setData] = useState();
-  
+  const [userInfo, setUserInfo] = useState<User[]>([]);
 
-  const handleSignIn = () => {
-    axios
-      .post('http://192.168.1.187:3001/api/customers/login', { email, password })
-      .then(response => {
-        // Handle successful sign-in
-        console.log(response.data);
-        
-      })
-      .catch(error => {
-        // Handle sign-in error
-        console.log(error);
-        Alert.alert('Sign In Failed', 'Invalid email or password');
-      });
+  const handleSignIn = async () => {
+    try {
+      const response = await axios.post('http://192.168.1.70:3001/api/customers/login', { email, password });
+      setUserInfo(response.data);
+      console.log(userInfo);
+    } catch (error) {
+      Alert.alert('Error', 'Failed to save data.');
+    }
   };
 
   return (
+    <>
     <View>
+    <StatusBar barStyle="dark-content" backgroundColor="#ffffff"/>
       <Text style={styles.mainText}>Email</Text>
       <TextInput
         style={styles.input}
@@ -41,14 +41,10 @@ export default function SignInScreen() {
         secureTextEntry
       />
       <Button title="Sign In" onPress={handleSignIn} />
-
-
-      <Text style={styles.mainText}>{data}</Text>
-
     </View>
+    </>
   );
 };
-
 
 const styles = StyleSheet.create({
   mainText: {
@@ -62,7 +58,6 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    color: 'black'  
+    color: 'black'
   }
 });
-
