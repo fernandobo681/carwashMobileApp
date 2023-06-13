@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   mainText: {
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 20,
     textAlign: 'justify'
   }
 });

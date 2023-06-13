@@ -1,44 +1,19 @@
-import * as React from 'react';
-import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SignInScreen from '../screens/auth/SignInScreen';
+import AuthStack from './AuthStack';
+import HomeStack from './HomeStack';
+
 
 const Stack = createNativeStackNavigator();
 
-const getIsSignedIn = () => {
-  // custom logic
-  return false;
-};
 
-export default function App() {
-  const isSignedIn = getIsSignedIn();
-
+export default function Navigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isSignedIn ? (
-          <>
-            <Stack.Screen name="Home" component={HomeScreen} />
-          </>
-        ) : (
-          <>
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-          </>
-        )}
+        {true ? AuthStack(Stack) : HomeStack(Stack)}
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
-
-function HomeScreen() {
-  return <View />;
-}
-
-function SignInScreen() {
-  return <View />;
-}
-
-function SignUpScreen() {
-  return <View />;
 }

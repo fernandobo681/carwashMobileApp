@@ -60,3 +60,9 @@ y con esto se manda a revision la aplicacion, ya solo vastaria que el equipo de 
 
 
 PD: No olvidar incrementar el numero de version de la aplicacion.
+
+
+
+pasos para correr la app
+
+npx react-native run-android    

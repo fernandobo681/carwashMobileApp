@@ -1,9 +1,0 @@
-The navigation folder is where you will keep all of the code 
-related to navigation in your application. This includes the 
-stacks, types, routes, and any other components or functions 
-needed to support navigation.
-
-By having all of your navigation code in a centralized location,
-it makes it easier to manage and maintain it, as well as reducing
-the risk of code duplication and making it easier to share navigation 
-functionality across different parts of your application.
