@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: '#a1a1a1'
+    backgroundColor: '#30A2FF'
   },
   textInput: {
     fontSize: 16,

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Alert, TextInput, StatusBar, SafeAreaView } from 'react-native';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
+import { ShowError } from '../../components/FlashMessages';
+
 
 export default function SignInScreen({ navigation }: any) {
 
@@ -17,10 +19,10 @@ export default function SignInScreen({ navigation }: any) {
 
   const onLogin = async () => {
     if (email == '' || password == '') {
-      createAlert('Por favor ingresa tu correo y contraseña');
+      ShowError('Por favor ingresa tu correo y contraseña')
       return
     } else {
-      navigation.navigate('SignUpScreen')
+      navigation.navigate('SignUpScreen');
     }
   }
 
@@ -30,37 +32,46 @@ export default function SignInScreen({ navigation }: any) {
     ]);
 
 
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.textInput}>Email</Text>
-      <TextInput
-        value={email}
-        placeholder='Ingresa un email'
-        style={styles.inputStyle}
-        placeholderTextColor="gray"
-        onChangeText={(email) => updateState({ email })}
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Klincar</Text>
+      <StatusBar
+        animated={true}
+        backgroundColor="#30A2FF"
+        barStyle="dark-content"
       />
-      <Text style={styles.textInput}>Password</Text>
-      <TextInput
-        value={password}
-        placeholder='Ingresa un email'
-        style={styles.inputStyle}
-        placeholderTextColor="gray"
-        secureTextEntry={isSecure}
-        onChangeText={(password) => updateState({ password })}
-      />
-      <ButtonWithLoader
-        text="Login"
-        onPress={onLogin}
-        isLoading={isLoading}
-      />
-      <View style={{ marginVertical: 8 }} />
-      <ButtonWithLoader
-        text="Signup"
-        onPress={() => navigation.navigate('SignUpScreen')}
-        isLoading={false}
-      />
-    </View>
+      <View>
+        <Text style={styles.textInput}>Email</Text>
+        <TextInput
+          value={email}
+          placeholder='Ingresa un email'
+          style={styles.inputStyle}
+          placeholderTextColor="gray"
+          onChangeText={(email) => updateState({ email })}
+        />
+        <Text style={styles.textInput}>Password</Text>
+        <TextInput
+          value={password}
+          placeholder='Ingresa un email'
+          style={styles.inputStyle}
+          placeholderTextColor="gray"
+          secureTextEntry={isSecure}
+          onChangeText={(password) => updateState({ password })}
+        />
+        <ButtonWithLoader
+          text="Login"
+          onPress={onLogin}
+          isLoading={isLoading}
+        />
+        <View style={{ marginVertical: 8 }} />
+        <ButtonWithLoader
+          text="Signup"
+          onPress={() => navigation.navigate('SignUpScreen')}
+          isLoading={false}
+        />
+      </View>
+    </SafeAreaView>
   )
 }
 
@@ -68,12 +79,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: '#a1a1a1'
+    backgroundColor: '#30A2FF'
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 40,
+    marginTop: 50,
+    marginBottom: 50,
+    fontWeight: 'bold',
+    color: '#ffffff'
   },
   textInput: {
     fontSize: 16,
     marginBottom: 8,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#000000'
   },
   inputStyle: {
     height: 48,
