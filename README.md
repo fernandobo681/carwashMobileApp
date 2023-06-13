@@ -65,4 +65,10 @@ PD: No olvidar incrementar el numero de version de la aplicacion.
 
 pasos para correr la app
 
-npx react-native run-android    
+npx react-native run-android
+
+video de login
+
+https://www.youtube.com/watch?v=CQYYcYhJMoQ
+
+min 42:39
