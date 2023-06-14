@@ -15,9 +15,6 @@ export default function SignInScreen({ navigation }: any) {
   const { isLoading, email, password, isSecure } = state
   const updateState = (data: any) => setState(() => ({ ...state, ...data }));
   const currentYear = moment().year();
-  console.log(currentYear);
-
-
   const onLogin = async () => {
     if (email == '' || password == '') {
       ShowError('Por favor ingresa tu correo y contraseña')
@@ -26,13 +23,6 @@ export default function SignInScreen({ navigation }: any) {
       navigation.navigate('SignUpScreen');
     }
   }
-
-  const createAlert = (msj: string) =>
-    Alert.alert('', msj, [
-      { text: 'Aceptar', onPress: () => console.log('OK Pressed') },
-    ]);
-
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +33,7 @@ export default function SignInScreen({ navigation }: any) {
         barStyle="dark-content"
       />
       <View>
-        <Text style={styles.textInput}>Email</Text>
+        <Text style={styles.textInput}>Correo electrónico</Text>
         <TextInput
           value={email}
           placeholder='Ingresa un email'
@@ -95,9 +85,9 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 40,
-    marginTop: 50,
-    marginBottom: 50,
+    fontSize: 60,
+    marginTop: 40,
+    marginBottom: 70,
     fontWeight: 'bold',
     color: '#30A2FF'
   },
@@ -122,6 +112,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     color: '#A1A1A1',
     textAlign: 'center',
+    marginBottom: 5
   },
   textCreateAccount: {
     marginTop: 10,
