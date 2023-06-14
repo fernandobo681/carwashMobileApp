@@ -25,7 +25,7 @@ export default function ButtonWithLoader({
 const styles = StyleSheet.create({
     btnStyle: {
         height: 48,
-        backgroundColor: 'blue',
+        backgroundColor: '#30A2FF',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
