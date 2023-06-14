@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 
+// Implementar el splash screen como se usa en el tutorial de React Navigation y accionarlo desde App.tsx
+
 
 export default function SplashScreen({ navigation }: any) {
 
