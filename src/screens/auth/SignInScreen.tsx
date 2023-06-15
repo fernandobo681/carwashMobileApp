@@ -6,9 +6,7 @@ import moment from 'moment';
 
 export default function SignInScreen({ navigation }: any) {
 
-
   const [keyboardStatus, setKeyboardStatus] = useState(false);
-
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
       setKeyboardStatus(true);
@@ -22,8 +20,6 @@ export default function SignInScreen({ navigation }: any) {
       hideSubscription.remove();
     };
   }, []);
-
-
   const [state, setState] = useState({
     isLoading: false,
     email: '',
@@ -33,7 +29,6 @@ export default function SignInScreen({ navigation }: any) {
   const { isLoading, email, password, isSecure } = state
   const updateState = (data: any) => setState(() => ({ ...state, ...data }));
   const currentYear = moment().year();
-
   const onLogin = async () => {
     if (email == '' || password == '') {
       ShowError('Por favor ingresa tu correo y contraseña')
@@ -56,7 +51,7 @@ export default function SignInScreen({ navigation }: any) {
         <TextInput
           value={email}
           onSubmitEditing={Keyboard.dismiss}
-          placeholder='Ingresa un email'
+          placeholder='Ingresa un correo electrónico'
           style={styles.inputStyle}
           placeholderTextColor="gray"
           onChangeText={(email) => updateState({ email })}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert, TextInput, StatusBar, SafeAreaView, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, Alert, TextInput, StatusBar, SafeAreaView, Keyboard, ScrollView } from 'react-native';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
 import { ShowError, ShowSuccess } from '../../components/FlashMessages';
 import moment from 'moment';
@@ -46,75 +46,78 @@ export default function SignUpScreen({ navigation }: any) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {keyboardStatus == false ? <Text style={styles.title}>Klincar</Text> : <></>}
-      <StatusBar
-        animated={true}
-        backgroundColor="#ffffff"
-        barStyle="dark-content"
-      />
-      <Text style={styles.textInput}>* Nombre completo</Text>
-      <TextInput
-        value={name}
-        onSubmitEditing={Keyboard.dismiss}
-        placeholder='Ingresa tu nombre'
-        style={styles.inputStyle}
-        placeholderTextColor="gray"
-        onChangeText={(name) => updateState({ name })}
-      />
+      <ScrollView>
+        {keyboardStatus == false ? <Text style={styles.title}>Klincar</Text> : <></>}
+        <StatusBar
+          animated={true}
+          backgroundColor="#ffffff"
+          barStyle="dark-content"
+        />
+        <Text style={styles.textInput}>* Nombre completo</Text>
+        <TextInput
+          value={name}
+          onSubmitEditing={Keyboard.dismiss}
+          placeholder='Ingresa tu nombre completo'
+          style={styles.inputStyle}
+          placeholderTextColor="gray"
+          onChangeText={(name) => updateState({ name })}
+        />
 
-      <Text style={styles.textInput}>* Correo electrónico</Text>
-      <TextInput
-        value={email}
-        onSubmitEditing={Keyboard.dismiss}
-        placeholder='Ingresa tu nombre'
-        style={styles.inputStyle}
-        placeholderTextColor="gray"
-        onChangeText={(email) => updateState({ email })}
-      />
+        <Text style={styles.textInput}>* Correo electrónico</Text>
+        <TextInput
+          value={email}
+          onSubmitEditing={Keyboard.dismiss}
+          placeholder='Ingresa tu correo electrónico'
+          style={styles.inputStyle}
+          placeholderTextColor="gray"
+          onChangeText={(email) => updateState({ email })}
+        />
 
-      <Text style={styles.textInput}>* Teléfono</Text>
-      <TextInput
-        value={phone}
-        onSubmitEditing={Keyboard.dismiss}
-        placeholder='Ingresa tu nombre'
-        style={styles.inputStyle}
-        placeholderTextColor="gray"
-        onChangeText={(phone) => updateState({ phone })}
-      />
+        <Text style={styles.textInput}>* Teléfono</Text>
+        <TextInput
+          value={phone}
+          onSubmitEditing={Keyboard.dismiss}
+          placeholder='Ingresa tu teléfono'
+          style={styles.inputStyle}
+          placeholderTextColor="gray"
+          onChangeText={(phone) => updateState({ phone })}
+        />
 
-      <Text style={styles.textInput}>* Contraseña</Text>
-      <TextInput
-        value={password}
-        onSubmitEditing={Keyboard.dismiss}
-        placeholder='Ingresa tu nombre'
-        style={styles.inputStyle}
-        placeholderTextColor="gray"
-        onChangeText={(password) => updateState({ password })}
-      />
-      <BouncyCheckbox
-        style={{ marginBottom: 20 }}
-        size={20}
-        fillColor="#30A2FF"
-        unfillColor="#FFFFFF"
-        text="Al registrarse, aceptas los términos y condiciones de Klincar"
-        iconStyle={{ borderColor: "red" }}
-        innerIconStyle={{
-          borderWidth: 2,
-          borderRadius: 5,
-        }}
-        textStyle={{
-          textDecorationLine: "none",
-          fontSize: 15
-        }}
-        onPress={(isChecked: boolean) => { setAceptTermsAndConditions(isChecked) }}
-      />
-      <Text style={styles.textTermsandConditions}>© Klincar {currentYear}. Todos los derechos reservados.</Text>
-      <ButtonWithLoader
-        text="Crear cuenta"
-        disabled={false}
-        onPress={onLogin}
-        isLoading={isLoading}
-      />
+        <Text style={styles.textInput}>* Contraseña</Text>
+        <TextInput
+          value={password}
+          onSubmitEditing={Keyboard.dismiss}
+          placeholder='Ingresa tu constraseña'
+          style={styles.inputStyle}
+          placeholderTextColor="gray"
+          onChangeText={(password) => updateState({ password })}
+        />
+        <BouncyCheckbox
+          style={{ marginBottom: 20 }}
+          size={20}
+          fillColor="#30A2FF"
+          unfillColor="#FFFFFF"
+          text="Al registrarse, aceptas los términos y condiciones de Klincar"
+          iconStyle={{ borderColor: "red" }}
+          innerIconStyle={{
+            borderWidth: 2,
+            borderRadius: 5,
+          }}
+          textStyle={{
+            textDecorationLine: "none",
+            fontSize: 15
+          }}
+          onPress={(isChecked: boolean) => { setAceptTermsAndConditions(isChecked) }}
+        />
+        <ButtonWithLoader
+          text="Crear cuenta"
+          disabled={false}
+          onPress={onLogin}
+          isLoading={isLoading}
+        />
+
+      </ScrollView>
+      { keyboardStatus == false ? <Text style={styles.textTermsandConditions}>© Klincar {currentYear}. Todos los derechos reservados.</Text> : null }
     </SafeAreaView>
   )
 }
