@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert, TextInput, StatusBar, SafeAreaView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Alert, TextInput, StatusBar, SafeAreaView, Keyboard } from 'react-native';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
 import { ShowError, ShowSuccess } from '../../components/FlashMessages';
 import moment from 'moment';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+
 
 export default function SignUpScreen({ navigation }: any) {
+
+  const [aceptTermsAndConditions, setAceptTermsAndConditions] = useState(false);
+  const [keyboardStatus, setKeyboardStatus] = useState(false);
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardStatus(true);
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardStatus(false);
+    });
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   const [state, setState] = useState({
     isLoading: false,
@@ -29,7 +46,7 @@ export default function SignUpScreen({ navigation }: any) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Klincar</Text>
+      {keyboardStatus == false ? <Text style={styles.title}>Klincar</Text> : <></>}
       <StatusBar
         animated={true}
         backgroundColor="#ffffff"
@@ -38,6 +55,7 @@ export default function SignUpScreen({ navigation }: any) {
       <Text style={styles.textInput}>* Nombre completo</Text>
       <TextInput
         value={name}
+        onSubmitEditing={Keyboard.dismiss}
         placeholder='Ingresa tu nombre'
         style={styles.inputStyle}
         placeholderTextColor="gray"
@@ -47,6 +65,7 @@ export default function SignUpScreen({ navigation }: any) {
       <Text style={styles.textInput}>* Correo electrónico</Text>
       <TextInput
         value={email}
+        onSubmitEditing={Keyboard.dismiss}
         placeholder='Ingresa tu nombre'
         style={styles.inputStyle}
         placeholderTextColor="gray"
@@ -56,6 +75,7 @@ export default function SignUpScreen({ navigation }: any) {
       <Text style={styles.textInput}>* Teléfono</Text>
       <TextInput
         value={phone}
+        onSubmitEditing={Keyboard.dismiss}
         placeholder='Ingresa tu nombre'
         style={styles.inputStyle}
         placeholderTextColor="gray"
@@ -65,15 +85,33 @@ export default function SignUpScreen({ navigation }: any) {
       <Text style={styles.textInput}>* Contraseña</Text>
       <TextInput
         value={password}
+        onSubmitEditing={Keyboard.dismiss}
         placeholder='Ingresa tu nombre'
         style={styles.inputStyle}
         placeholderTextColor="gray"
         onChangeText={(password) => updateState({ password })}
       />
-
+      <BouncyCheckbox
+        style={{ marginBottom: 20 }}
+        size={20}
+        fillColor="#30A2FF"
+        unfillColor="#FFFFFF"
+        text="Al registrarse, aceptas los términos y condiciones de Klincar"
+        iconStyle={{ borderColor: "red" }}
+        innerIconStyle={{
+          borderWidth: 2,
+          borderRadius: 5,
+        }}
+        textStyle={{
+          textDecorationLine: "none",
+          fontSize: 15
+        }}
+        onPress={(isChecked: boolean) => { setAceptTermsAndConditions(isChecked) }}
+      />
       <Text style={styles.textTermsandConditions}>© Klincar {currentYear}. Todos los derechos reservados.</Text>
       <ButtonWithLoader
         text="Crear cuenta"
+        disabled={false}
         onPress={onLogin}
         isLoading={isLoading}
       />

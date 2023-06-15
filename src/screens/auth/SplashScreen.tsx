@@ -1,24 +1,22 @@
-import React, { useEffect } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Image, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 
-// Implementar el splash screen como se usa en el tutorial de React Navigation y accionarlo desde App.tsx
-
-
-export default function SplashScreen({ navigation }: any) {
-
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate('SignInScreen');
-    }, 1000);
-  }, []);
-
+export default function SplashScreen() {
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../../assets/images/icon-carwash.png')}
-        style={styles.logo}
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        animated={true}
+        backgroundColor="#30A2FF"
+        barStyle="dark-content"
       />
-    </View>
+      <View>
+        <Image
+          source={require('../../assets/images/icon-carwash.png')}
+          style={styles.logo}
+        />
+      </View>
+    </SafeAreaView>
+
   )
 }
 
@@ -27,7 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#30A2FF',
   },
   logo: {
     width: 200,

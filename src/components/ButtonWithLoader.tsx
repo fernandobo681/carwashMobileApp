@@ -4,16 +4,18 @@ import { Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-nat
 interface Button {
     isLoading: boolean,
     text: string,
-    onPress: any
+    onPress: any,
+    disabled: boolean
 }
 
 export default function ButtonWithLoader({
     isLoading,
     text,
-    onPress
+    onPress,
+    disabled
 }: Button) {
     return (
-        <TouchableOpacity onPress={onPress} style={styles.btnStyle}>
+        <TouchableOpacity onPress={onPress} style={styles.btnStyle} disabled={disabled}>
 
             {!!isLoading ? <ActivityIndicator size="large" color="white" />
                 : <Text style={styles.textStyle}>{text}</Text>

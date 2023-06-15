@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert, TextInput, StatusBar, SafeAreaView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TextInput, StatusBar, SafeAreaView, Keyboard } from 'react-native';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
 import { ShowError } from '../../components/FlashMessages';
 import moment from 'moment';
 
 export default function SignInScreen({ navigation }: any) {
+
+
+  const [keyboardStatus, setKeyboardStatus] = useState(false);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardStatus(true);
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardStatus(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
 
   const [state, setState] = useState({
     isLoading: false,
@@ -15,6 +33,7 @@ export default function SignInScreen({ navigation }: any) {
   const { isLoading, email, password, isSecure } = state
   const updateState = (data: any) => setState(() => ({ ...state, ...data }));
   const currentYear = moment().year();
+
   const onLogin = async () => {
     if (email == '' || password == '') {
       ShowError('Por favor ingresa tu correo y contraseña')
@@ -26,7 +45,7 @@ export default function SignInScreen({ navigation }: any) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Klincar</Text>
+      {keyboardStatus == false ? <Text style={styles.title}>Klincar</Text> : <></>}
       <StatusBar
         animated={true}
         backgroundColor="#ffffff"
@@ -36,6 +55,7 @@ export default function SignInScreen({ navigation }: any) {
         <Text style={styles.textInput}>Correo electrónico</Text>
         <TextInput
           value={email}
+          onSubmitEditing={Keyboard.dismiss}
           placeholder='Ingresa un email'
           style={styles.inputStyle}
           placeholderTextColor="gray"
@@ -44,6 +64,7 @@ export default function SignInScreen({ navigation }: any) {
         <Text style={styles.textInput}>Contraseña</Text>
         <TextInput
           value={password}
+          onSubmitEditing={Keyboard.dismiss}
           placeholder='Ingresa contraseña'
           style={styles.inputStyle}
           placeholderTextColor="gray"
@@ -52,16 +73,12 @@ export default function SignInScreen({ navigation }: any) {
         />
         <Text style={styles.forgotYouPass}>¿Olvidaste tú contraseña?</Text>
         <ButtonWithLoader
+          disabled={false}
           text="Iniciar sesión"
           onPress={onLogin}
           isLoading={isLoading}
         />
         <View style={{ marginVertical: 8 }} />
-        {/* <ButtonWithLoader
-          text="Signup"
-          onPress={() => navigation.navigate('SignUpScreen')}
-          isLoading={false}
-        /> */}
       </View>
       <Text style={styles.textCreateAccount}>
         <Text >¿Aún no tienes cuenta? </Text>
@@ -72,7 +89,6 @@ export default function SignInScreen({ navigation }: any) {
         </Text>
       </Text>
       <Text style={styles.textTermsandConditions}>© Klincar {currentYear}. Todos los derechos reservados.</Text>
-
     </SafeAreaView>
   )
 }
