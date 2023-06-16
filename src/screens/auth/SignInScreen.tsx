@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, StatusBar, SafeAreaView, Keyboard } 
 import ButtonWithLoader from '../../components/ButtonWithLoader';
 import { ShowError } from '../../components/FlashMessages';
 import moment from 'moment';
+import { validateEmail } from '../../components/EmailValidator';
 
 export default function SignInScreen({ navigation }: any) {
 
@@ -20,6 +21,7 @@ export default function SignInScreen({ navigation }: any) {
       hideSubscription.remove();
     };
   }, []);
+
   const [state, setState] = useState({
     isLoading: false,
     email: '',
@@ -29,18 +31,25 @@ export default function SignInScreen({ navigation }: any) {
   const { isLoading, email, password, isSecure } = state
   const updateState = (data: any) => setState(() => ({ ...state, ...data }));
   const currentYear = moment().year();
+
+
   const onLogin = async () => {
     if (email == '' || password == '') {
-      ShowError('Por favor ingresa tu correo y contraseña')
+      ShowError('Por favor ingresa tu correo y contraseña');
       return
     } else {
-      navigation.navigate('SignUpScreen');
+      if (validateEmail(email)) {
+        console.log('El correo electrónico es válido:', email);
+        navigation.navigate('SignUpScreen');
+      } else {
+        console.log('El correo electrónico no es válido:', email);
+      }
     }
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      {keyboardStatus == false ? <Text style={styles.title}>Klincar</Text> : <></>}
+      {keyboardStatus == false ? <Text style={styles.title}>Klincar</Text> : <Text style={styles.titleSmall}>Klincar</Text>}
       <StatusBar
         animated={true}
         backgroundColor="#ffffff"
@@ -102,10 +111,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#30A2FF'
   },
+  titleSmall: {
+    textAlign: 'center',
+    fontSize: 40,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    color: '#30A2FF'
+  },
   forgotYouPass: {
     textAlign: 'right',
     color: '#30A2FF',
-    marginBottom: 30
+    marginBottom: 30,
+    textDecorationLine: 'underline'
   },
   textInput: {
     fontSize: 16,

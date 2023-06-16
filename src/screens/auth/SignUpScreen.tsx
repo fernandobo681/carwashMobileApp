@@ -47,7 +47,7 @@ export default function SignUpScreen({ navigation }: any) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {keyboardStatus == false ? <Text style={styles.title}>Klincar</Text> : <></>}
+        {keyboardStatus == false ? <Text style={styles.title}>Klincar</Text> : <Text style={styles.titleSmall}>Klincar</Text>}
         <StatusBar
           animated={true}
           backgroundColor="#ffffff"
@@ -105,7 +105,8 @@ export default function SignUpScreen({ navigation }: any) {
           }}
           textStyle={{
             textDecorationLine: "none",
-            fontSize: 15
+            fontSize: 13,
+            color: '#A1A1A1'
           }}
           onPress={(isChecked: boolean) => { setAceptTermsAndConditions(isChecked) }}
         />
@@ -133,6 +134,13 @@ const styles = StyleSheet.create({
     fontSize: 60,
     marginTop: 40,
     marginBottom: 70,
+    fontWeight: 'bold',
+    color: '#30A2FF'
+  },
+  titleSmall: {
+    textAlign: 'center',
+    fontSize: 40,
+    marginBottom: 10,
     fontWeight: 'bold',
     color: '#30A2FF'
   },
